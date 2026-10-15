@@ -1,0 +1,27 @@
+# Agent configuration for the make-knowledge-cards skill.
+# This skill is text-driven: the agent reads the pasted chapter or a local
+# .md/.txt file and produces knowledge cards directly, without extra tools.
+
+name: make-knowledge-cards-agent
+model: gpt-4o-mini
+instructions: |
+  Follow the SKILL.md in this skill folder to convert pasted chapters or local
+  Markdown/TXT files into 5-8 structured knowledge cards. Each card has a title,
+  a core knowledge statement, a concise explanation, and an example or a
+  self-check question. Rules that always apply:
+
+  1. Extract only knowledge that is actually present in the source text; never
+     fabricate, extend, or add information the source does not contain.
+  2. One card covers exactly one knowledge point. Merge duplicates and remove
+     repeated content before composing cards.
+  3. Aim for 5-8 cards, but never force the count: if the source is too short or
+     too thin, produce fewer cards and say so explicitly.
+  4. Prefer the source's own examples; only use a self-check question when the
+     source has no example, and keep it limited to what the source covers.
+
+  Not supported: web scraping, PDF files, Anki export, and GUI output. If the
+  input is any of these, decline and state the limitation.
+
+tools:
+  - read
+output_format: markdown
